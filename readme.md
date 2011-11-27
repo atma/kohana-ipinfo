@@ -5,7 +5,7 @@ Kohana module for doing IP to Location lookups using the free IP Info DB service
 
 Configuration
 -------------
-Before the begin obtain the API key from and put it to `config/ipinfo.php`.
+Before the begin obtain an API key from [ipinfodb](http://ipinfodb.com/account.php) and put it to `config/ipinfo.php`.
 
     'key' => 'your ipinfodb.com API key',
 
