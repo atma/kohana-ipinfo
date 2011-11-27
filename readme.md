@@ -31,4 +31,10 @@ Get info for remote addres and store its in $info var
 Get info for the custom IP
 
     $info = IpInfo::factory('xxx.xx.x.y');
+    //or
+    $info->ip('xxx.xx.x.y');
 
+Note
+----
+
+Module does not use any controllers or views, does not set session or cookie values so you should implement required functionality by yourself.
