@@ -15,8 +15,14 @@ abstract class Kohana_IpInfo
         return new IpInfo($ip);
     }
     
+    public function loaded()
+    {
+        return (is_array($this->data) AND count($this->data));
+    }
+    
     protected function _set($ip = null)
     {
+        $this->data = null;
         $this->config = Kohana::$config->load('ipinfo');
         // do quick IPv4 check
         if ($ip === null OR !preg_match("/\b(?:\d{1,3}\.){3}\d{1,3}\b/", $ip))
@@ -46,6 +52,11 @@ abstract class Kohana_IpInfo
             $this->data = $data;
             
             if ($data['statusCode'] !== 'OK')
+                return false;
+            
+            $data = array_map(array('IpInfo', '_clean_values'), $data);
+            
+            if (!$data['countryCode'] OR !$data['countryName'])
                 return false;
             
             $data['lastCheck'] = time();
@@ -218,5 +229,14 @@ abstract class Kohana_IpInfo
         {
             return false;
         }
+    }
+    
+    // Remove unwanted chars from ipinfodb response
+    protected static function _clean_values($v)
+    {
+        if ($v === '-')
+            return '';
+        
+        return $v;
     }
 }
