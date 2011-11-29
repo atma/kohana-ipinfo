@@ -25,7 +25,7 @@ abstract class Kohana_IpInfo
         $this->data = null;
         $this->config = Kohana::$config->load('ipinfo');
         // do quick IPv4 check
-        if ($ip === null OR !preg_match("/\b(?:\d{1,3}\.){3}\d{1,3}\b/", $ip))
+        if ($ip === null OR !preg_match("/\b(?:\d{1,3}\.){3}\d{1,3}\b/", $ip) AND $this->config['use_default'])
             $ip = Request::$client_ip;
         if (strpos($ip, '127') === 0 OR strpos($ip, '192') === 0 OR strpos($ip, '10.') === 0)
             $ip = $this->config['default_ip'];

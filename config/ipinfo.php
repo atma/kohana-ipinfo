@@ -12,5 +12,6 @@ return array(
     'key' => 'your ipinfodb.com API key',
     'cache_time' => 3600 * 24 * 30,
     'default_ip' => '80.247.32.206',
+    'use_default' => false,
     'auto_localize' => true,
 );
